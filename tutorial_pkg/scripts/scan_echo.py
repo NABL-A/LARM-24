@@ -28,12 +28,18 @@ def scan_callback(scanMsg):
 
     sample= [ [ round(p[0], 2), round(p[1], 2) ] for p in  obstacles[10:20] ]
     rosNode.get_logger().info( f" obs({len(obstacles)}) ...{sample}..." )
+    msg = PointCloud()
+    msg._points = sample
+    rosNode.create_publisher( PointCloud, 'scan_results' , 10)
     print(sample)
 
 rclpy.init()
+
 rosNode= Node('scan_interpreter')
 rosNode.create_subscription( LaserScan, 'scan', scan_callback, 10)
-rosNode.create_publisher( PointCloud, 'scan_results' , 10)
+
+
+
 
 
 
