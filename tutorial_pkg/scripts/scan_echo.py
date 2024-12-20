@@ -23,17 +23,23 @@ def scan_callback(scanMsg):
                 math.sin(angle) * aDistance
             ]
             
-            obstacles.append(aPoint)
+            aPointCurrent = Point32()  
+            aPointCurrent.x = aPoint[0]
+            aPointCurrent.y = aPoint[1]
+            aPointCurrent.z= (float)(0)
+
+            obstacles.append(aPointCurrent)
             
         angle+= scanMsg.angle_increment
+    
+    aPointCloud = PointCloud()
 
     sample= [ [ round(p[0], 2), round(p[1], 2) ] for p in  obstacles[10:20] ]
+
+    aPointCloud.points = sample
+
     rosNode.get_logger().info( f" obs({len(obstacles)}) ...{sample}..." )
-    aPoint= Point32()
-    aPoint.x= (float)(math.cos(angle) * aDistance)
-    aPoint.y= (float)(math.sin( angle ) * aDistance)
-    aPoint.z= (float)(0)
-    aPublisher.publish(aPoint)
+    aPublisher.publish(aPointCloud)
     print(sample)
 
 rclpy.init()
