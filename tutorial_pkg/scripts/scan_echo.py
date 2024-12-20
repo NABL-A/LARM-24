@@ -33,8 +33,6 @@ def scan_callback(scanMsg):
     aPointCloud.header = scanMsg.header  
     aPointCloud.points = obstacles  
 
-    rosNode.get_logger().info(f"Nombre d'obstacles détectés : {len(obstacles)}")
-
     aPublisher.publish(aPointCloud)
 
 def main():
