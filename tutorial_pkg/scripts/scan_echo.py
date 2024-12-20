@@ -1,4 +1,3 @@
-#!python3
 import math
 import rclpy
 from rclpy.node import Node
@@ -6,19 +5,17 @@ from sensor_msgs.msg import LaserScan
 from sensor_msgs.msg import PointCloud
 from geometry_msgs.msg import Point32
 
-rosNode= None
+rosNode = None
+aPublisher = None
 
 def scan_callback(scanMsg):
-    global rosNode
-    #print(f"Nombre de ranges : {len(scanMsg.ranges)}")
-    #rosNode.get_logger().info( f"scan:\n{scanMsg.header}")
+    global rosNode, aPublisher
+    obstacles = []
+    angle = scanMsg.angle_min
 
-    # détection obstacles
-    obstacles= []
-    angle= scanMsg.angle_min
-    for aDistance in scanMsg.ranges :
-        if 0.1 < aDistance and aDistance < 5.0 :
-            aPoint= [
+    for aDistance in scanMsg.ranges:
+        if 0.1 < aDistance < 5.0:  
+            aPoint = [
                 math.cos(angle) * aDistance,
                 math.sin(angle) * aDistance
             ]
@@ -26,30 +23,35 @@ def scan_callback(scanMsg):
             aPointCurrent = Point32()  
             aPointCurrent.x = aPoint[0]
             aPointCurrent.y = aPoint[1]
-            aPointCurrent.z= (float)(0)
+            aPointCurrent.z = 0.0  
 
             obstacles.append(aPointCurrent)
             
-        angle+= scanMsg.angle_increment
-    
+        angle += scanMsg.angle_increment
+
     aPointCloud = PointCloud()
+    aPointCloud.header = scanMsg.header  
+    aPointCloud.points = obstacles  
 
-    sample= [ [ round(p[0], 2), round(p[1], 2) ] for p in  obstacles[10:20] ]
+    rosNode.get_logger().info(f"Nombre d'obstacles détectés : {len(obstacles)}")
 
-    aPointCloud.points = sample
-
-    rosNode.get_logger().info( f" obs({len(obstacles)}) ...{sample}..." )
     aPublisher.publish(aPointCloud)
-    print(sample)
 
-rclpy.init()
+def main():
+    global rosNode, aPublisher
+    rclpy.init()
 
-rosNode= Node('scan_interpreter')
-rosNode.create_subscription( LaserScan, 'scan', scan_callback, 10)
-aPublisher = rosNode.create_publisher( PointCloud, 'scan_results' , 10)
+    rosNode = Node('scan_interpreter')
+    rosNode.create_subscription(LaserScan, 'scan', scan_callback, 10)
+    aPublisher = rosNode.create_publisher(PointCloud, 'scan_results', 10)
 
+    try:
+        rclpy.spin(rosNode)
+    except KeyboardInterrupt:
+        pass
 
-while True :
-    rclpy.spin_once( rosNode )
-scanInterpret.destroy_node()
-rclpy.shutdown()
+    rosNode.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
