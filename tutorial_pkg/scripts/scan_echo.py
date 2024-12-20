@@ -4,6 +4,7 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import LaserScan
 from sensor_msgs.msg import PointCloud
+from geometry_msgs.msg import Point32
 
 rosNode= None
 
@@ -28,19 +29,18 @@ def scan_callback(scanMsg):
 
     sample= [ [ round(p[0], 2), round(p[1], 2) ] for p in  obstacles[10:20] ]
     rosNode.get_logger().info( f" obs({len(obstacles)}) ...{sample}..." )
-    msg = PointCloud()
-    msg._points = sample
-    rosNode.create_publisher( PointCloud, 'scan_results' , 10)
+    aPoint= Point32()
+    aPoint.x= (float)(math.cos(angle) * aDistance)
+    aPoint.y= (float)(math.sin( angle ) * aDistance)
+    aPoint.z= (float)(0)
+    aPublisher.publish(aPoint)
     print(sample)
 
 rclpy.init()
 
 rosNode= Node('scan_interpreter')
 rosNode.create_subscription( LaserScan, 'scan', scan_callback, 10)
-
-
-
-
+aPublisher = rosNode.create_publisher( PointCloud, 'scan_results' , 10)
 
 
 while True :
