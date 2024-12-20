@@ -44,36 +44,65 @@ class StraightCtrl :
 
         # Initialize control callback:
         self._timForCtrl= rosNode.create_timer(
-            0.05, self.control_callback
+            2, self.control_callback
         )
 
     def scan_callback(self, scanMsg ):
-        self._logger.info( '> get scan' )
+        #self._logger.info( '> get scan' )
 
         angle = scanMsg.angle_min
-        obstacles = []
+        obstacles_gauche = []
+        obstacles_droite = []
 
         for aDistance in scanMsg.ranges:
-            if angle > scanMsg.angle_min and angle < 0 :
-            
-            if angle < scanMsg.angle_max and angle > 0 :
+            if not math.isinf(aDistance) and aDistance > 0.1:  
+                if angle > -1.57 and angle < 0 and aDistance < 0.5:
+                    aPoint = [
+                        math.cos(angle) * aDistance,
+                        math.sin(angle) * aDistance
+                    ]
+                    
+                    aPointCurrent = Point32()  
+                    aPointCurrent.x = aPoint[0]
+                    aPointCurrent.y = aPoint[1]
+                    aPointCurrent.z = 0.0  
 
+                    obstacles_gauche.append(aPointCurrent)
+                    
+                if angle < 1.57 and angle > 0 and aDistance < 0.5:
+                    aPoint = [
+                        math.cos(angle) * aDistance,
+                        math.sin(angle) * aDistance
+                    ]
+                    
+                    aPointCurrent = Point32()  
+                    aPointCurrent.x = aPoint[0]
+                    aPointCurrent.y = aPoint[1]
+                    aPointCurrent.z = 0.0  
 
-            
-            if 0.1 < aDistance < 5.0:  
-                aPoint = [
-                    math.cos(angle) * aDistance,
-                    math.sin(angle) * aDistance
-                ]
-                
-                aPointCurrent = Point32()  
-                aPointCurrent.x = aPoint[0]
-                aPointCurrent.y = aPoint[1]
-                aPointCurrent.z = 0.0  
-
-                obstacles.append(aPointCurrent)
+                    obstacles_droite.append(aPointCurrent)
                 
             angle += scanMsg.angle_increment
+
+        print(f"Obstacles left : {obstacles_gauche}")
+        print(f"Obstacles right : {obstacles_droite}")
+
+
+        if len(obstacles_gauche) != 0 :
+            self.obstacle_left = True
+            print("Oh ptn à gauche !")
+        else :
+            self.obstacle_left = False
+            print("Rien à gauche !")
+
+
+        if len(obstacles_droite) != 0 :
+            self.obstacle_right = True  
+            print("Attention à droite !")
+        else :
+            self.obstacle_right = False
+            print("Rien à droite !")
+
 
     def control_callback(self):
         self._logger.info( '< define control' )
