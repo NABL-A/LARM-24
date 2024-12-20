@@ -3,7 +3,7 @@ import math
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import LaserScan
-from sensor_msgs.msg import PointCloud
+from geometry_msgs.msg._point32 import Point32
 
 rosNode= None
 
@@ -33,7 +33,7 @@ def scan_callback(scanMsg):
 rclpy.init()
 rosNode= Node('scan_interpreter')
 rosNode.create_subscription( LaserScan, 'scan', scan_callback, 10)
-rosNode.create_publisher( PointCloud, 'scan_results' , 10)
+rosNode.create_publisher( Point32, 'scan_results' , 10)
 
 
 
