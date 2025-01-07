@@ -26,3 +26,4 @@ endif()
 ament_package()
 
 install( PROGRAMS scripts/process_image.py DESTINATION lib/${PROJECT_NAME} )
+install( PROGRAMS scripts/detection_objet.py DESTINATION lib/${PROJECT_NAME} )

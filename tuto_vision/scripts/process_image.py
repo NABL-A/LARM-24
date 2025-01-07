@@ -79,31 +79,60 @@ def main(args=None):
         # Convert images to numpy arrays
         depth_image = np.asanyarray(depth_frame.get_data())
         color_image = np.asanyarray(color_frame.get_data())
+        green_image = color_image
+
+        hsv_image = cv2.cvtColor(green_image, cv2.COLOR_BGR2HSV)
+        lower_green = np.array([35,50,50])
+        upper_green = np.array([85,255,255])
+        mask_green = cv2.inRange(hsv_image, lower_green, upper_green)
+
+
+        kernel = np.ones((5, 5), np.uint8)
+        mask_green = cv2.erode(mask_green, kernel, iterations=1)
+        im_green = cv2.bitwise_and(green_image, green_image, mask=mask_green)
+
+
+
+        binary_image = cv2.cvtColor(im_green, cv2.COLOR_BGR2GRAY)
+        _,binary_image=cv2.threshold(binary_image,20,255,cv2.THRESH_BINARY)
+        binary_image=cv2.erode(binary_image, kernel, iterations=1)
+        kernel2=cv2.getStructuringElement(cv2.MORPH_RECT,(25,25))
+        binary_image=cv2.morphologyEx(binary_image, cv2.MORPH_CLOSE,kernel2)
+
+        contours, _ = cv2.findContours(binary_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        num_objects = len(contours)
+        print(f"Nombre d'objets détectés : {num_objects}")
+
         infra_image_1 = np.asanyarray(infra_frame_1.get_data())
         infra_image_2 = np.asanyarray(infra_frame_2.get_data())
 
         # Publish images
-        rsNode.publish_imgs(color_image)
+        rsNode.publish_imgs(color_image,im_green)
         rsNode.publish_infra_imgs(infra_image_1, infra_image_2)
 
         # Apply colormap on depth image (image must be converted to 8-bit per pixel first)
         depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.03), cv2.COLORMAP_JET)
 
         color_image_resized = cv2.resize(color_image, (848, 480))
+        green_image_resized = cv2.resize(im_green, (848, 480))
         depth_colormap_resized = cv2.resize(depth_colormap, (848, 480))
         infra_image_1_resized = cv2.resize(infra_image_1, (848, 480))
         infra_image_2_resized = cv2.resize(infra_image_2, (848, 480))
+        #binary = cv2.resize(binary_image, (848, 480))
 
         infra_image_1_rgb = cv2.cvtColor(infra_image_1_resized, cv2.COLOR_GRAY2BGR)
         infra_image_2_rgb = cv2.cvtColor(infra_image_2_resized, cv2.COLOR_GRAY2BGR)
 
-        top_row = np.hstack((color_image_resized, depth_colormap_resized))  
-        bottom_row = np.hstack((infra_image_1_rgb, infra_image_2_rgb))
-        all_images = np.vstack((top_row, bottom_row))
+        #top_row = np.hstack((color_image_resized, depth_colormap_resized))  
+        #bottom_row = np.hstack((binary, infra_image_1_rgb))
+        #all_images = np.vstack((top_row, bottom_row))
 
         # Show images
+        image_with_contours = green_image_resized.copy()
+        #cv2.drawContours(image_with_contours, contours, -1, (0,255,0), 3) 
+
         cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
-        cv2.imshow('RealSense', all_images)
+        cv2.imshow('RealSense', binary_image)
         cv2.waitKey(1)
 
         # Frequency:
@@ -127,17 +156,24 @@ class Realsense(Node):
         super().__init__('realsense')
         self.bridge = CvBridge()
         self.image_publisher = self.create_publisher(Image, 'realsense/color_image', 10)
+        self.green_detection_publisher = self.create_publisher(Image, 'green_detection', 10)
+
         self.infra_publisher_1 = self.create_publisher(Image, 'infrared_1', 10)
         self.infra_publisher_2 = self.create_publisher(Image, 'infrared_2', 10)
     
     def read_imgs(self):
         pass
 
-    def publish_imgs(self, color_image):
+    def publish_imgs(self, color_image, green_image):
         msg_image = self.bridge.cv2_to_imgmsg(color_image, "bgr8")
         msg_image.header.stamp = self.get_clock().now().to_msg()
         msg_image.header.frame_id = "image"
         self.image_publisher.publish(msg_image)
+
+        green_detection = self.bridge.cv2_to_imgmsg(green_image, "bgr8")
+        green_detection.header.stamp = self.get_clock().now().to_msg()
+        green_detection.header.frame_id = "image with green"
+        self.green_detection_publisher.publish(green_detection)
 
     def publish_infra_imgs(self, infra_image_1, infra_image_2):
         msg_infra_1 = self.bridge.cv2_to_imgmsg(infra_image_1, "mono8")

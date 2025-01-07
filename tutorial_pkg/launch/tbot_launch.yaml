@@ -1,0 +1,8 @@
+launch:
+    - node :
+    	pkg : "tbot_sim"
+    	exec : "challenge-1.launch.py"
+    - node:
+        pkg: "tutorial_pkg"
+        exec: "straigth_simulation.py"
+
