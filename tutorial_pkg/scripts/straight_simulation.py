@@ -36,7 +36,7 @@ class StraightCtrl :
 
         # Initialize publisher:
         self._pubVelocity= rosNode.create_publisher(
-            Twist, '/gazebo', 10
+            Twist, '/cmd_vel', 10
         )
 
         # Initialize scan callback:

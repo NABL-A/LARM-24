@@ -1,0 +1,4 @@
+launch:
+  - node:
+      pkg: "tutorial_pkg"
+      exec: "straight.py"

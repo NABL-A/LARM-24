@@ -5,6 +5,7 @@ from rclpy.node import Node
 from sensor_msgs.msg import LaserScan
 from geometry_msgs.msg import Twist
 from geometry_msgs.msg import Point32
+from kobuki_ros_interfaces.msg import WheelDropEvent
 
 # Ros Node process:
 def main():

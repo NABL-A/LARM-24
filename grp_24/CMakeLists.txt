@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(tutorial_pkg)
+project(grp_24)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -7,12 +7,16 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(geometry_msgs REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 
 
+# Install resource files.
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}/
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -27,14 +31,3 @@ if(BUILD_TESTING)
 endif()
 
 ament_package()
-
-# Python scripts
-install( PROGRAMS scripts/talker DESTINATION lib/${PROJECT_NAME} )
-install( PROGRAMS scripts/listener DESTINATION lib/${PROJECT_NAME} )
-install( PROGRAMS scripts/test_move.py DESTINATION lib/${PROJECT_NAME} )
-install( PROGRAMS scripts/pournous.py DESTINATION lib/${PROJECT_NAME} )
-install( PROGRAMS scripts/scan_echo.py DESTINATION lib/${PROJECT_NAME} )
-install( PROGRAMS scripts/test_move.py DESTINATION lib/${PROJECT_NAME} )
-install( PROGRAMS scripts/straight.py DESTINATION lib/${PROJECT_NAME} )
-install( PROGRAMS scripts/straight_simulation.py DESTINATION lib/${PROJECT_NAME} )
-
