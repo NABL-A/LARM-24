@@ -4,135 +4,153 @@ import math
 from rclpy.node import Node
 from sensor_msgs.msg import LaserScan
 from geometry_msgs.msg import Twist
-from geometry_msgs.msg import Point32
 from kobuki_ros_interfaces.msg import WheelDropEvent
+from kobuki_ros_interfaces.msg import BumperEvent
 
 def main():
-    # Initialize ROS and a ROS node
     rclpy.init()
     rosNode = Node("basic_move")
 
-    # Initialize our control:
     control = StraightCtrl()
     control.initializeRosNode(rosNode)
 
-    # Infinite loop:
     rclpy.spin(rosNode)
 
-    # Clean end
     rosNode.destroy_node()
     rclpy.shutdown()
 
 
-# Ros Node Class:
 class StraightCtrl:
     def initializeRosNode(self, rosNode):
-        # Get logger from the node:
         self._logger = rosNode.get_logger()
         self.obstacle_left = False
         self.obstacle_right = False
         self.obstacle_middle = False
+        self.trop_proche = False
+        self.min_distance_middle = float('inf')
         self.wheel_left_dropped = False
         self.wheel_right_dropped = False
 
-        # Initialize publisher:
         self._pubVelocity = rosNode.create_publisher(
             Twist, '/multi/cmd_nav', 10
         )
 
-        # Initialize scan callback:
         self._subToScan = rosNode.create_subscription(
             LaserScan, '/scan',
             self.scan_callback, 10
         )
 
-        # Subscribe to WheelDropEvent:
         self._subToWheelDrop = rosNode.create_subscription(
             WheelDropEvent, '/events/wheel_drop',
             self.wheel_drop_callback, 10
         )
 
-        # Initialize control callback:
+        self._subToBumper = rosNode.create_subscription(
+            BumperEvent, '/events/bumper',
+            self.contact_callback, 10
+        )
+
         self._timForCtrl = rosNode.create_timer(
             0.1, self.control_callback
         )
 
     def scan_callback(self, scanMsg):
         angle = scanMsg.angle_min
+        self.trop_proche = False
+        self.min_distance_middle = float('inf')
+        self.cote="middle"
+        self.min=float('inf')
+
         obstacles_gauche = []
         obstacles_droite = []
         obstacles_centre = []
 
         for aDistance in scanMsg.ranges:
-            if not math.isinf(aDistance) and aDistance > 0.1:
-                if angle > scanMsg.angle_min and angle < -0.9 and aDistance < 0.5:
-                    aPoint = [
-                        math.cos(angle) * aDistance,
-                        math.sin(angle) * aDistance
-                    ]
-                    aPointCurrent = Point32()
-                    aPointCurrent.x = aPoint[0]
-                    aPointCurrent.y = aPoint[1]
-                    obstacles_droite.append(aPointCurrent)
-
-                if angle < scanMsg.angle_max and angle > 0.9 and aDistance < 0.3:
-                    aPoint = [
-                        math.cos(angle) * aDistance,
-                        math.sin(angle) * aDistance
-                    ]
-                    aPointCurrent = Point32()
-                    aPointCurrent.x = aPoint[0]
-                    aPointCurrent.y = aPoint[1]
-                    obstacles_gauche.append(aPointCurrent)
-
-                if angle < 0.9 and angle > -0.9 and aDistance < 0.3:
-                    aPoint = [
-                        math.cos(angle) * aDistance,
-                        math.sin(angle) * aDistance
-                    ]
-                    aPointCurrent = Point32()
-                    aPointCurrent.x = aPoint[0]
-                    aPointCurrent.y = aPoint[1]
-                    obstacles_centre.append(aPointCurrent)
+            if not math.isinf(aDistance) and scanMsg.range_min < aDistance < scanMsg.range_max:
+                # Classify points into zones
+                if angle > 0.9:
+                    obstacles_gauche.append(aDistance)
+                    if aDistance < self.min:
+                        self.min=aDistance
+                        self.cote="gauche"
+                elif angle < -0.9:
+                    obstacles_droite.append(aDistance)
+                    if aDistance < self.min:
+                        self.min=aDistance
+                        self.cote="droite"
+                elif -0.9 <= angle <= 0.9:
+                    obstacles_centre.append(aDistance)
+                    self.min_distance_middle = min(self.min_distance_middle, aDistance)
 
             angle += scanMsg.angle_increment
 
-        self.obstacle_left = len(obstacles_gauche) != 0
-        self.obstacle_right = len(obstacles_droite) != 0
-        self.obstacle_middle = len(obstacles_centre) != 0
+        # Update obstacle detection
+        self.obstacle_left = len(obstacles_gauche) > 0 and min(obstacles_gauche, default=float('inf')) < 0.5
+        self.obstacle_right = len(obstacles_droite) > 0 and min(obstacles_droite, default=float('inf')) < 0.5
+        self.obstacle_middle = len(obstacles_centre) > 0 and self.min_distance_middle < 0.5
+
+        # Update "trop proche"
+        self.trop_proche = self.min_distance_middle < 0.3
+
+    def contact_callback(self, contact):
+        if contact.state == BumperEvent.PRESSED:
+            self._logger.warning("Collision detected! Stopping.")
+            twist = Twist()
+            self._pubVelocity.publish(twist)
+            quit()
 
     def wheel_drop_callback(self, msg):
-        # Update wheel drop state
         if msg.wheel == WheelDropEvent.LEFT:
             self.wheel_left_dropped = msg.state == WheelDropEvent.DROPPED
         elif msg.wheel == WheelDropEvent.RIGHT:
             self.wheel_right_dropped = msg.state == WheelDropEvent.DROPPED
 
         self._logger.info(
-            f"Wheel drop event received: "
-            f"LEFT={self.wheel_left_dropped}, RIGHT={self.wheel_right_dropped}"
+            f"Wheel drop event: LEFT={self.wheel_left_dropped}, RIGHT={self.wheel_right_dropped}"
         )
 
     def control_callback(self):
         if self.wheel_left_dropped or self.wheel_right_dropped:
-            self._logger.warning("Wheel dropped! Stopping the robot.")
+            self._logger.warning("Wheel dropped! Stopping.")
             twist = Twist()
             self._pubVelocity.publish(twist)
+            quit()
             return
 
         twist = Twist()
-        if not self.obstacle_middle:
-            twist.linear.x = 0.2
-        elif self.obstacle_left and not self.obstacle_right:
-            twist.angular.z = -0.5
-        elif self.obstacle_right and not self.obstacle_left:
-            twist.angular.z = 0.5
-        else:
-            twist.angular.z = 0.5
+
+        if self.trop_proche and self.cote =="droite":
+            twist.linear.x = 0.0
+            twist.angular.z = 2.0  # Rotate slightly to avoid collision
+        
+        if self.trop_proche and self.cote =="gauche":
+            twist.linear.x = 0.0
+            twist.angular.z = -2.0
+
+        elif not self.obstacle_middle:
+            twist.linear.x = 0.5
+            twist.angular.z = 0.0
+
+        elif self.obstacle_middle :
+
+            if self.obstacle_left and not self.obstacle_right:
+                twist.linear.x = 0.2
+                twist.angular.z = -2.0
+
+            elif self.obstacle_right and not self.obstacle_left:
+                twist.linear.x = 0.2
+                twist.angular.z = 2.0
+            
+            elif self.cote=="droite":
+                twist.linear.x = 0.0
+                twist.angular.z = 2.0
+            
+            elif self.cote=="gauche":
+                twist.linear.x = 0.0
+                twist.angular.z = -2.0
 
         self._pubVelocity.publish(twist)
 
 
-# Go:
 if __name__ == '__main__':
     main()
