@@ -90,7 +90,7 @@ class StraightCtrl:
         self.obstacle_middle = len(obstacles_centre) > 0 and self.min_distance_middle < 0.5
 
         # Update "trop proche"
-        self.trop_proche = self.min_distance_middle < 0.3
+        self.trop_proche = self.min_distance_middle < 0.2
 
     def contact_callback(self, contact):
         if contact.state == BumperEvent.PRESSED:
@@ -121,7 +121,7 @@ class StraightCtrl:
 
         if self.trop_proche and self.cote =="droite":
             twist.linear.x = 0.0
-            twist.angular.z = 2.0  # Rotate slightly to avoid collision
+            twist.angular.z = 2.0  
         
         if self.trop_proche and self.cote =="gauche":
             twist.linear.x = 0.0

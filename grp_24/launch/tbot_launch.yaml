@@ -1,9 +1,5 @@
 launch:
   - node:
-      pkg: "tuto_vision"
-      exec: "process_image.py"
-  
-  - node:
       pkg: "tutorial_pkg"
       exec: "straight.py"
 
@@ -12,3 +8,8 @@ launch:
       exec: "rviz2"
       name: "rviz2"
       args: "-d $(find-pkg-share grp_24)/launch/config_image.rviz"
+
+  - node:
+      pkg: "tuto_vision"
+      exec: "process_image.py"
+      launch-prefix: "gnome-terminal --"
