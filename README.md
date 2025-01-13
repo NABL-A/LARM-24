@@ -32,16 +32,17 @@ Set the ROS_DOMAIN_ID to value 24 by running the following commands:
         echo "export ROS_DOMAIN_ID=24" >> ~/.bashrc
         
 
-Add additional libraries (pkg-interfaces, realsense2):
+Add additional libraries (pkg-interfaces, realsense2).
 You can use the following commands:
-pkg-interfaces :
+
+Pkg-interfaces :
 
         cd ros_space
         git clone https://github.com/imt-mobisyst/pkg-interfaces.git
         colcon build --base-path pkg-interfaces
         source ./install/setup.bash
         
-realsense2 :
+Realsense2 :
         
         git clone https://github.com/Microsoft/vcpkg.git
         cd vcpkg
