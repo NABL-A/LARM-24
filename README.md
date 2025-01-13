@@ -47,7 +47,7 @@ To install the project, clone the A2-S4 GitHub repository using the following co
 #### Usage
 
 To start the simulation, use the following command, which will open a Gazebo window and launch the robot's movement simulation:
-    ros2 launch  grp_24 simulation_launch.yaml
+    '''ros2 launch grp_24 simulation_launch.yaml'''
 
 to start the TurtleBot's navigation, use the following command:
-    ros2 launch grp_24 tbot_launch.yaml
+   '''ros2 launch grp_24 tbot_launch.yaml'''
