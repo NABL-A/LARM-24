@@ -20,16 +20,16 @@ Create a special package, which we can call ros_space, to hold the various GitHu
 You can use the following commands in your terminal:
 
         
-        ros2 pkg create --build-type ament_cmake ros_space
-        colcon list
-        colcon build
+    ros2 pkg create --build-type ament_cmake ros_space
+    colcon list
+    colcon build
         
 
 Set the ROS_DOMAIN_ID to value 24 by running the following commands:
 
         
-        export ROS_DOMAIN_ID=24
-        echo "export ROS_DOMAIN_ID=24" >> ~/.bashrc
+    export ROS_DOMAIN_ID=24
+    echo "export ROS_DOMAIN_ID=24" >> ~/.bashrc
         
 
 Add additional libraries (pkg-interfaces, realsense2).
@@ -37,28 +37,28 @@ You can use the following commands:
 
 Pkg-interfaces :
 
-        cd ros_space
-        git clone https://github.com/imt-mobisyst/pkg-interfaces.git
-        colcon build --base-path pkg-interfaces
-        source ./install/setup.bash
+    cd ros_space
+    git clone https://github.com/imt-mobisyst/pkg-interfaces.git
+    colcon build --base-path pkg-interfaces
+    source ./install/setup.bash
         
 Realsense2 :
         
-        git clone https://github.com/Microsoft/vcpkg.git
-        cd vcpkg
-        ./bootstrap-vcpkg.sh
-        ./vcpkg integrate install
-        ./vcpkg install realsense2
+    git clone https://github.com/Microsoft/vcpkg.git
+    cd vcpkg
+    ./bootstrap-vcpkg.sh
+    ./vcpkg integrate install
+    ./vcpkg install realsense2
         
     
 Install Gazebo software by running the following commands in your terminal:
 
         
-        cd ~/ros_space
-        git clone https://github.com/imt-mobisyst/pkg-tsim
-        colcon build
-        source ./install/setup.bash
-        
+    cd ~/ros_space
+    git clone https://github.com/imt-mobisyst/pkg-tsim
+    colcon build
+    source ./install/setup.bash
+    
 
 
 
