@@ -42,7 +42,7 @@ To test the project, make sure the following steps are completed:
 
 To install the project, clone the A2-S4 GitHub repository using the following commands:
     cd ros-workspace
-    git clone https://github.com/alexis426871/LARM-24.git
+    git clone https://github.com/NABL-A/LARM-24.git
 
 #### Usage
 
