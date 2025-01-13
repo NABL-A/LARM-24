@@ -23,7 +23,7 @@ To test the project, make sure the following steps are completed:
         export ROS_DOMAIN_ID=24
         echo "export ROS_DOMAIN_ID=24" >> ~/.bashrc
 
-    - Add additional libraries (& pkg-interfaces):
+    - Add additional libraries (pkg-interfaces):
     You can use the following commands:
         cd ros_space
         git clone https://github.com/imt-mobisyst/pkg-interfaces.git
@@ -47,7 +47,7 @@ To install the project, clone the A2-S4 GitHub repository using the following co
 #### Usage
 
 To start the simulation, use the following command, which will open a Gazebo window and launch the robot's movement simulation:
-    '''ros2 launch grp_24 simulation_launch.yaml'''
+    ```ros2 launch grp_24 simulation_launch.yaml```
 
 to start the TurtleBot's navigation, use the following command:
-   '''ros2 launch grp_24 tbot_launch.yaml'''
+   ```ros2 launch grp_24 tbot_launch.yaml```
