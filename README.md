@@ -19,7 +19,7 @@ Verify that Python 3 is installed on your machine and check the value of the ROS
 Create a special package, which we can call ros_space, to hold the various GitHub repositories and libraries needed for the project.
 You can use the following commands in your terminal:
 
-```sh    
+```bash    
 ros2 pkg create --build-type ament_cmake ros_space
 colcon list
 colcon build
