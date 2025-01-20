@@ -13,6 +13,7 @@ from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
 from visualization_msgs.msg import MarkerArray, Marker
 from geometry_msgs.msg import Pose
+import math
 
 # Charger le modèle YOLOv5
 model = torch.hub.load(
@@ -58,7 +59,7 @@ def main(args=None):
 
     # Initialiser ROS2
     rclpy.init(args=args)
-    rs_node = Realsense()
+    rs_node = Realsense(pipeline)
 
     while is_running:
         rclpy.spin_once(rs_node, timeout_sec=0.001)
@@ -82,10 +83,10 @@ def main(args=None):
         detection_image = np.array(results.ims[0])
         detection_image = cv2.cvtColor(detection_image, cv2.COLOR_RGB2BGR)
 
-        # Publier les images et les marqueurs
+        # Publier les images, marqueurs et distances
         rs_node.publish_image(color_image, detection_image)
         rs_node.publish_markers(results, depth_frame)
-        rs_node.publish_distances(results, depth_frame)
+        rs_node.publish_distances(results, depth_frame, frames)
 
         # Afficher les résultats
         cv2.namedWindow('YOLO Detection', cv2.WINDOW_AUTOSIZE)
@@ -102,13 +103,14 @@ def main(args=None):
 
 # Classe ROS2 pour la publication des images et des marqueurs
 class Realsense(Node):
-    def __init__(self):
+    def __init__(self, pipeline):
         super().__init__('realsense')
         self.bridge = CvBridge()
         self.image_publisher = self.create_publisher(Image, 'realsense/color_image', 10)
         self.detection_publisher = self.create_publisher(Image, 'yolo/detection', 10)
         self.marker_publisher = self.create_publisher(MarkerArray, 'yolo/markers', 10)
         self.distance_publisher = self.create_publisher(Pose, 'distance', 10)
+        self.pipeline = pipeline
 
     def publish_image(self, color_image, detection_image):
         # Publier l'image RGB originale
@@ -128,10 +130,22 @@ class Realsense(Node):
         for i, (x1, y1, x2, y2, conf, cls) in enumerate(results.xyxy[0].cpu().numpy()):
             x_center = int((x1 + x2) / 2)
             y_center = int((y1 + y2) / 2)
-
+            
             # Obtenir la distance du LiDAR
-            distance = depth_frame.get_distance(x_center, y_center)
+            min_x=x1
+            min_y=y1
+            distance_min=5000
+            for x in range(int(x1),int(x2),30):
+                for y in range(int(y1),int(y2),30):
+                    distance=depth_frame.get_distance(x, y)
+                    if distance_min>distance:
+                        distance_min=distance
+                        min_x=x
+                        min_y=y
+            
 
+            distance = depth_frame.get_distance(x_center, y_center)
+            #distance=depth_frame.get_distance(min_x, min_y)
             # Créer un marqueur
             marker = Marker()
             marker.header.frame_id = "camera_link"
@@ -153,25 +167,41 @@ class Realsense(Node):
             marker.color.b = 0.0
 
             marker_array.markers.append(marker)
+        
 
         self.marker_publisher.publish(marker_array)
 
-    def publish_distances(self, results, depth_frame):
+    def publish_distances(self, results, depth_frame, frames):
+        color_intrin = frames.get_profile().as_video_stream_profile().get_intrinsics()
         for i, (x1, y1, x2, y2, conf, cls) in enumerate(results.xyxy[0].cpu().numpy()):
-            x_center = int((x1 + x2) / 2)
-            y_center = int((y1 + y2) / 2)
+            x = int(x1)
+            y = int(y1)
+            w = int(x2 - x1)
+            h = int(y2 - y1)
 
-            # Obtenir la distance du LiDAR
-            distance = depth_frame.get_distance(x_center, y_center)
+            # Calculer la profondeur du pixel central
+            depth = depth_frame.get_distance(int(x + w / 2), int(y + h / 2))
+
+            # Obtenir les coordonnées 3D
+            dx, dy, dz = rs.rs2_deproject_pixel_to_point(color_intrin, [int(x + w / 2), int(y + h / 2)], depth)
+
+            # Calcul de l'angle theta
+            a = 424 / (35 * 3.14159 / 180)  # Facteur de conversion pixels/radians
+            theta = -(int(x + w / 2) - 424) / a
+            distance = math.sqrt(dx**2 + dy**2 + dz**2)
 
             # Créer un message Pose
-            pose_msg = Pose()
-            pose_msg.position.x = distance
-            pose_msg.position.y = (x_center - 424) * distance / 848  # Ajuster les dimensions
-            pose_msg.position.z = (y_center - 240) * distance / 480  # Ajuster les dimensions
-            pose_msg.orientation.w = 1.0
+            pose = Pose()
+            if distance**2 < 0.04:
+                pose.position.x = 0.0
+            else:
+                pose.position.x = math.sqrt(distance**2 - 0.04)
+                pose.position.y = distance * math.sin(theta)
+                pose.position.z = 0.0
+                pose.orientation.w = 1.0
 
-            self.distance_publisher.publish(pose_msg)
+            # Publier la pose
+            self.distance_publisher.publish(pose)
 
 if __name__ == '__main__':
     main()
