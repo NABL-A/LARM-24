@@ -144,7 +144,7 @@ class Realsense(Node):
                         min_y=y
             
 
-            distance = depth_frame.get_distance(x_center, y_center)
+            #distance = depth_frame.get_distance(x_center, y_center)
             #distance=depth_frame.get_distance(min_x, min_y)
             # Créer un marqueur
             marker = Marker()
