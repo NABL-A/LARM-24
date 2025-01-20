@@ -12,6 +12,7 @@ from rclpy.node import Node
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
 from visualization_msgs.msg import MarkerArray, Marker
+from geometry_msgs.msg import Pose
 
 # Charger le modèle YOLOv5
 model = torch.hub.load(
@@ -84,6 +85,7 @@ def main(args=None):
         # Publier les images et les marqueurs
         rs_node.publish_image(color_image, detection_image)
         rs_node.publish_markers(results, depth_frame)
+        rs_node.publish_distances(results, depth_frame)
 
         # Afficher les résultats
         cv2.namedWindow('YOLO Detection', cv2.WINDOW_AUTOSIZE)
@@ -106,6 +108,7 @@ class Realsense(Node):
         self.image_publisher = self.create_publisher(Image, 'realsense/color_image', 10)
         self.detection_publisher = self.create_publisher(Image, 'yolo/detection', 10)
         self.marker_publisher = self.create_publisher(MarkerArray, 'yolo/markers', 10)
+        self.distance_publisher = self.create_publisher(Pose, 'distance', 10)
 
     def publish_image(self, color_image, detection_image):
         # Publier l'image RGB originale
@@ -152,6 +155,23 @@ class Realsense(Node):
             marker_array.markers.append(marker)
 
         self.marker_publisher.publish(marker_array)
+
+    def publish_distances(self, results, depth_frame):
+        for i, (x1, y1, x2, y2, conf, cls) in enumerate(results.xyxy[0].cpu().numpy()):
+            x_center = int((x1 + x2) / 2)
+            y_center = int((y1 + y2) / 2)
+
+            # Obtenir la distance du LiDAR
+            distance = depth_frame.get_distance(x_center, y_center)
+
+            # Créer un message Pose
+            pose_msg = Pose()
+            pose_msg.position.x = distance
+            pose_msg.position.y = (x_center - 424) * distance / 848  # Ajuster les dimensions
+            pose_msg.position.z = (y_center - 240) * distance / 480  # Ajuster les dimensions
+            pose_msg.orientation.w = 1.0
+
+            self.distance_publisher.publish(pose_msg)
 
 if __name__ == '__main__':
     main()
