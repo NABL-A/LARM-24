@@ -21,9 +21,6 @@ model = torch.hub.load(
 )
 model.conf = 0.5
 
-confidence_threshold = 0.5  # Ajustez selon vos besoins
-
-
 def signal_interruption(signum, frame):
     global is_running
     print("\nCtrl-c pressed")
@@ -68,7 +65,7 @@ def main(args=None):
     rs_node = Realsense(pipeline)
 
     while is_running:
-        distance = []
+        distance = 0
         x_center = 0
         y_center = 0
         rclpy.spin_once(rs_node, timeout_sec=0.001)
@@ -106,46 +103,40 @@ def main(args=None):
         results = model(color_image_rgb)
         results.render()
 
-        annotated_images = []
-        print("1")
-        for img_idx in range(len(results.ims)):
-            print("2")
-            detection_image = np.array(results.ims[img_idx])  # Extraire l'image annotée
-            detection_image_bgr = cv2.cvtColor(detection_image, cv2.COLOR_RGB2BGR)  # Convertir en BGR pour OpenCV
+        # Convertir l'image annotée en BGR pour OpenCV
+        detection_image = np.array(results.ims[0])
+        detection_image_bgr = cv2.cvtColor(detection_image, cv2.COLOR_RGB2BGR)
 
-            # Parcourir les détections associées à cette image
-            for i, (x1, y1, x2, y2, conf, cls) in enumerate(results.xyxy[img_idx].cpu().numpy()):
-                print("3")
-                if conf < confidence_threshold:  # Filtrer les faibles confiances
-                    continue
+        for i, (x1, y1, x2, y2, conf, cls) in enumerate(results.xyxy[0].cpu().numpy()):
 
-                x_center = int((x1 + x2) / 2)
-                y_center = int((y1 + y2) / 2)
+            x_center = int((x1 + x2) / 2)
+            y_center = int((y1 + y2) / 2)
 
-                # Calculer la distance à partir du centre de la boîte englobante
-                depth = depth_frame.get_distance(x_center, y_center)
-                dx, dy, dz = rs.rs2_deproject_pixel_to_point(color_intrin, [x_center, y_center], depth)
-                print("4")
-                a = math.sqrt(dx**2 + dy**2 + dz**2)
+            # Obtenir la distance minimale dans la boîte englobante
+            '''distance_min = 5000
+            for x in range(int(x1), int(x2), 30):
+                for y in range(int(y1), int(y2), 30):
+                    distance = depth_frame.get_distance(x, y)
+                    if distance_min > distance:
+                        distance_min = distance'''
+       
+            depth = depth_frame.get_distance(x_center, y_center)
+            dx, dy, dz = rs.rs2_deproject_pixel_to_point(color_intrin, [x_center, y_center], depth)
+            distance = math.sqrt(dx**2 + dy**2 + dz**2)
 
-                # Annoter l'image avec la distance
-                cv2.putText(
-                    print("5")
-                    detection_image_bgr,
-                    f"Distance: {a:.2f} meters",
-                    (x_center - 50, y_center - 20),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.6,
-                    (0, 255, 0),
-                    2
-                )
-
-            annotated_images.append(detection_image_bgr)
+            # Annoter l'image avec la distance
+            cv2.putText(
+                detection_image_bgr,
+                f"Distance: {distance:.2f} meters",
+                (x_center - 50, y_center - 20),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.6,
+                (0, 255, 0),
+                2
+            )
 
         # Afficher les résultats
-        for img_idx, annotated_img in enumerate(annotated_images):
-            print("6")
-            cv2.imshow(f"YOLO Detection {img_idx}", annotated_img)
+        cv2.imshow("YOLO Detection", detection_image_bgr)
 
         # Afficher la carte de profondeur colorisée
         depth_colormap = cv2.applyColorMap(

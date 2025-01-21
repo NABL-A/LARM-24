@@ -16,16 +16,12 @@ from geometry_msgs.msg import Pose
 import math
 
 # Charger le modèle YOLOv5
+
 model = torch.hub.load(
-    "/home/a2s4/yolov5/", 'custom', path='/home/a2s4/yolov5/weightsss/best.pt', source='local'
-)
-model.conf=0.5
-model20 = torch.hub.load(
     "/home/a2s4/yolov5/", 'custom', path='/home/a2s4/yolov5/weightsss/best20.pt', source='local'
 )
-model20.conf=0.5
-#model20.iou = 0.45  # Réglez ce seuil (valeur typique : 0.45)
-#model20.conf = 0.5  # Réglez le seuil de confiance (valeur typique : 0.5)
+model.conf=0.5
+
 
 
 # Définir le seuil de confiance
@@ -95,17 +91,17 @@ def main(args=None):
         image_for_model = cv2.cvtColor(color_image, cv2.COLOR_BGR2RGB)
         results = model(image_for_model)
         results.render()
-        results20 = model20(image_for_model)
-        results20.render()
+        #results20 = model20(image_for_model)
+        #results20.render()
         
         
         detection_image = np.array(results.ims[0])
 
         detection_image = cv2.cvtColor(detection_image, cv2.COLOR_RGB2BGR)
 
-        detection_image20 = np.array(results20.ims[0])
+        #detection_image20 = np.array(results20.ims[0])
 
-        detection_image20 = cv2.cvtColor(detection_image20, cv2.COLOR_RGB2BGR)
+        #detection_image20 = cv2.cvtColor(detection_image20, cv2.COLOR_RGB2BGR)
 
         # Publier les images, marqueurs et distances
         rs_node.publish_image(color_image, detection_image)
@@ -115,7 +111,7 @@ def main(args=None):
         # Afficher les résultats
         cv2.namedWindow('YOLO Detection', cv2.WINDOW_AUTOSIZE)
         #cv2.imshow('YOLO Detection', np.concatenate((detection_image,detection_image20),axis=0))
-        cv2.imshow('YOLO Detection', detection_image20)
+        cv2.imshow('YOLO Detection', detection_image)
         cv2.waitKey(1)
 
     # Arrêter le flux
