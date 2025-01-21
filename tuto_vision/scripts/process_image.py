@@ -17,7 +17,12 @@ import math
 
 # Charger le modèle YOLOv5
 model = torch.hub.load(
-    "/home/a2s4/yolov5/", 'custom', path='/home/a2s4/yolov5/weightsss/best.pt', source='local')
+    "/home/a2s4/yolov5/", 'custom', path='/home/a2s4/yolov5/weightsss/best.pt', source='local'
+)
+model.conf=0.5
+
+# Définir le seuil de confiance
+confidence_threshold = 0.5  # Ajustez selon vos besoins
 
 def signal_interruption(signum, frame):
     global is_running
@@ -65,9 +70,14 @@ def main(args=None):
         rclpy.spin_once(rs_node, timeout_sec=0.001)
 
         # Obtenir une image RGB et une image de profondeur
+
+        #nouvelle ligne
         frames = pipeline.wait_for_frames()
-        color_frame = frames.get_color_frame()
-        depth_frame = frames.get_depth_frame()
+        aligned_framed = self.align.process(frames)
+        depth_frame= aligned_framed.get_depth_frame()
+        frames= frames.get_color_frame()
+        #color_frame = frames.get_color_frame()
+        #depth_frame = frames.get_depth_frame()
 
         if not color_frame or not depth_frame:
             continue
@@ -80,7 +90,9 @@ def main(args=None):
         image_for_model = cv2.cvtColor(color_image, cv2.COLOR_BGR2RGB)
         results = model(image_for_model)
         results.render()
+        
         detection_image = np.array(results.ims[0])
+
         detection_image = cv2.cvtColor(detection_image, cv2.COLOR_RGB2BGR)
 
         # Publier les images, marqueurs et distances
@@ -128,24 +140,20 @@ class Realsense(Node):
         current_time = self.get_clock().now().to_msg()
 
         for i, (x1, y1, x2, y2, conf, cls) in enumerate(results.xyxy[0].cpu().numpy()):
+            if conf < confidence_threshold:  # Filtrer les faibles confiances
+                continue
+
             x_center = int((x1 + x2) / 2)
             y_center = int((y1 + y2) / 2)
-            
-            # Obtenir la distance du LiDAR
-            min_x=x1
-            min_y=y1
-            distance_min=5000
-            for x in range(int(x1),int(x2),30):
-                for y in range(int(y1),int(y2),30):
-                    distance=depth_frame.get_distance(x, y)
-                    if distance_min>distance:
-                        distance_min=distance
-                        min_x=x
-                        min_y=y
-            
 
-            #distance = depth_frame.get_distance(x_center, y_center)
-            #distance=depth_frame.get_distance(min_x, min_y)
+            # Obtenir la distance minimale dans la boîte englobante
+            distance_min = 5000
+            for x in range(int(x1), int(x2), 30):
+                for y in range(int(y1), int(y2), 30):
+                    distance = depth_frame.get_distance(x, y)
+                    if distance_min > distance:
+                        distance_min = distance
+
             # Créer un marqueur
             marker = Marker()
             marker.header.frame_id = "camera_link"
@@ -154,9 +162,9 @@ class Realsense(Node):
             marker.id = i
             marker.type = Marker.SPHERE
             marker.action = Marker.ADD
-            marker.pose.position.x = distance
-            marker.pose.position.y = (x_center - 424) * distance / 848  # Ajuster les dimensions
-            marker.pose.position.z = (y_center - 240) * distance / 480  # Ajuster les dimensions
+            marker.pose.position.x = distance_min
+            marker.pose.position.y = (x_center - 424) * distance_min / 848
+            marker.pose.position.z = (y_center - 240) * distance_min / 480
             marker.pose.orientation.w = 1.0
             marker.scale.x = 0.1
             marker.scale.y = 0.1
@@ -167,13 +175,15 @@ class Realsense(Node):
             marker.color.b = 0.0
 
             marker_array.markers.append(marker)
-        
 
         self.marker_publisher.publish(marker_array)
 
     def publish_distances(self, results, depth_frame, frames):
         color_intrin = frames.get_profile().as_video_stream_profile().get_intrinsics()
         for i, (x1, y1, x2, y2, conf, cls) in enumerate(results.xyxy[0].cpu().numpy()):
+            if conf < confidence_threshold:  # Filtrer les faibles confiances
+                continue
+
             x = int(x1)
             y = int(y1)
             w = int(x2 - x1)
