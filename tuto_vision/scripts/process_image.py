@@ -10,9 +10,12 @@ import torch
 import rclpy
 from rclpy.node import Node
 from cv_bridge import CvBridge
+import rclpy.time
 from sensor_msgs.msg import Image
 from visualization_msgs.msg import MarkerArray, Marker
 from geometry_msgs.msg import Pose
+from tf2_ros import *
+from tf2_geometry_msgs import *
 import math
 
 # Charger le modèle YOLOv5
@@ -148,8 +151,17 @@ class Realsense(Node):
         self.pipeline = pipeline
         self.align_to = rs.stream.color
         self.align = rs.align(self.align_to)
+
+        # Transform tool:
+        self.tf_buffer = tf2_ros.Buffer()
+        self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
+
         self.results=None
-        i=0
+        self.marker_id=0
+        self.Pose_markers=[]
+        self.marker_array=MarkerArray()
+        #marker_array=MarkerArray()
+        self.distance=0.2
 
         #self.color_intrin= None
 
@@ -165,9 +177,9 @@ class Realsense(Node):
         self.detection_publisher.publish(msg_detection)
 
     def publish_markers(self, results, depth_frame, color_intrin):
-        marker_array = MarkerArray()
+        self.get_logger().info("publish_markers() called")
         current_time = self.get_clock().now().to_msg()
-
+        currentTime =rclpy.time.Time()
         if self.results is None:
             return
 
@@ -176,6 +188,7 @@ class Realsense(Node):
         detection_image_bgr = cv2.cvtColor(detection_image, cv2.COLOR_RGB2BGR)
 
         for i, (x1, y1, x2, y2, conf, cls) in enumerate(results.xyxy[0].cpu().numpy()):
+            self.get_logger().info(f"Number of detections: {len(results.xyxy[0])}")
 
             x_center = int((x1 + x2) / 2)
             y_center = int((y1 + y2) / 2)
@@ -192,18 +205,44 @@ class Realsense(Node):
             dx, dy, dz = rs.rs2_deproject_pixel_to_point(color_intrin, [x_center, y_center], depth)
             distance = math.sqrt(dx**2 + dy**2 + dz**2)
 
+            pose_from_camera = Pose()
+            pose_from_camera.position.x = dx
+            pose_from_camera.position.y = dy
+            pose_from_camera.position.z = dz
+            pose_from_camera.orientation.x = 0.0
+            pose_from_camera.orientation.y = 0.0
+            pose_from_camera.orientation.z = 0.0
+            pose_from_camera.orientation.w = 1.0
+
+            '''
+            pose_from_camera.x = distance
+            pose_from_camera.y = (x_center - 424) * distance / 848
+            pose_from_camera.z = (y_center - 240) * distance / 480
+            pose_from_camera.w = 1.0
+            '''
+
+            # Get Transformation
+            try:
+                stampedTransform = self.tf_buffer.lookup_transform(
+                    'odom',
+                    'laser_link',
+                    currentTime
+                )
+            except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException, tf2_ros.TransformException) as tex:
+                self.get_logger().info( f'Could not transform: {tex}')
+                return
+            
+            # Compute goal into local coordinates
+            self.map_pose = tf2_geometry_msgs.do_transform_pose( pose_from_camera, stampedTransform )
+            for pt in self.Pose_markers:
+                print("\n\non est là\n\n\n")
+                if euclidean_distance((self.map_pose.position.x, self.map_pose.position.y), pt) <= self.distance:
+                    return
+
+            self.Pose_markers.append((self.map_pose.position.x, self.map_pose.position.y))
+
             # Créer un marqueur
             marker = Marker()
-            marker.header.frame_id = "camera_link"
-            marker.header.stamp = current_time
-            marker.ns = "yolo_markers"
-            marker.id = i
-            marker.type = Marker.SPHERE
-            marker.action = Marker.ADD
-            marker.pose.position.x = distance
-            marker.pose.position.y = (x_center - 424) * distance / 848
-            marker.pose.position.z = (y_center - 240) * distance / 480
-            marker.pose.orientation.w = 1.0
             marker.scale.x = 0.1
             marker.scale.y = 0.1
             marker.scale.z = 0.1
@@ -211,10 +250,25 @@ class Realsense(Node):
             marker.color.r = 1.0
             marker.color.g = 0.0
             marker.color.b = 0.0
+            marker.pose=self.map_pose
+            marker.header.frame_id = "odom"
+            marker.header.stamp = current_time
+            #marker.ns = "yolo_markers"
+            marker.id = self.marker_id
+            marker.type = Marker.SPHERE
+            marker.action = Marker.ADD
+            self.get_logger().info(f"Marker created: ID={self.marker_id}, Position=({dx}, {dy}, {dz})")
 
-            marker_array.markers.append(marker)
+            self.get_logger().info(f"Publishing marker ID={self.marker_id}")
+            self.marker_array.markers.append(marker)
+            self.marker_id=+1
+        
 
-        self.marker_publisher.publish(marker_array)
+        self.marker_publisher.publish(self.marker_array)
+            
+def euclidean_distance(a, b):
+    return ((a[0]-b[0])**2+(a[1]-b[1])**2)**0.5
+
 
     '''def publish_distances(self, results, depth_frame, frames):
         color_intrin = frames.get_profile().as_video_stream_profile().get_intrinsics()
