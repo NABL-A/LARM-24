@@ -146,7 +146,8 @@ class Realsense(Node):
         self.bridge = CvBridge()
         self.image_publisher = self.create_publisher(Image, 'realsense/color_image', 10)
         self.detection_publisher = self.create_publisher(Image, 'yolo/detection', 10)
-        self.marker_publisher = self.create_publisher(MarkerArray, 'yolo/markers', 10)
+        #self.marker_publisher = self.create_publisher(MarkerArray, 'yolo/markers', 10)
+        self.marker_publisher = self.create_publisher(Marker, 'yolo/markers', 10)
         self.distance_publisher = self.create_publisher(Pose, 'distance', 10)
         self.pipeline = pipeline
         self.align_to = rs.stream.color
@@ -159,7 +160,7 @@ class Realsense(Node):
         self.results=None
         self.marker_id=0
         self.Pose_markers=[]
-        self.marker_array=MarkerArray()
+        #self.marker_array=MarkerArray()
         #marker_array=MarkerArray()
         self.distance=0.2
 
@@ -260,11 +261,12 @@ class Realsense(Node):
             self.get_logger().info(f"Marker created: ID={self.marker_id}, Position=({dx}, {dy}, {dz})")
 
             self.get_logger().info(f"Publishing marker ID={self.marker_id}")
-            self.marker_array.markers.append(marker)
+            self.marker_publisher.publish(marker)
+            #self.marker_array.markers.append(marker)
             self.marker_id=+1
         
 
-        self.marker_publisher.publish(self.marker_array)
+        #self.marker_publisher.publish(self.marker_array)
             
 def euclidean_distance(a, b):
     return ((a[0]-b[0])**2+(a[1]-b[1])**2)**0.5
