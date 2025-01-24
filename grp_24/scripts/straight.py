@@ -128,7 +128,7 @@ class StraightCtrl:
             twist.angular.z = -2.0
 
         elif not self.obstacle_middle:
-            twist.linear.x = 0.5
+            twist.linear.x = 0.3
             twist.angular.z = 0.0
 
         elif self.obstacle_middle :

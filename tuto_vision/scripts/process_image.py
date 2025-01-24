@@ -167,7 +167,7 @@ class Realsense(Node):
         self.Pose_markers=[]
         #self.marker_array=MarkerArray()
         #marker_array=MarkerArray()
-        self.distance=0.2
+        self.distance=0.3
 
         #self.color_intrin= None
 

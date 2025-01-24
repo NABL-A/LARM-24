@@ -1,8 +1,0 @@
-launch:
-  - node:
-      pkg: "grp_pibot24v_2"
-      exec: "launch_slam"
-  - node:
-      pkg: "rviz2"
-      exec: "rviz2"
-      args: "-d $(find-pkg-share grp_pibot29_2)/config/config_marker.rviz"

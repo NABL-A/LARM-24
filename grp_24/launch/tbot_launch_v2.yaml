@@ -1,14 +1,14 @@
 launch:
   - node:
       pkg: "grp_24"
-      exec: "launch_slam.py"
+      exec: "launch_slam"
   - node:
       pkg: "rviz2"
       exec: "rviz2"
-      args: "-d $(find-pkg-share grp_24)/src/marker.rviz"
-  - node:
-      pkg: "grp_24"
-      exec: "straight.py"
+      args: "-d $(find-pkg-share grp_24)/src/pose_marker.rviz"
   - node:
       pkg: "tuto_vision"
       exec: "process_image.py"
+  - node:
+      pkg: "grp_24"
+      exec: "straight.py"
