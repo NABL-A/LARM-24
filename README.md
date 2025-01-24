@@ -75,7 +75,8 @@ git clone https://github.com/NABL-A/LARM-24.git
 colcon build
 source ./install/setup.bash
 ```
-    
+
+
 #### Usage
 
 To start the simulation, use the following command, which will open a Gazebo window and launch the robot's movement simulation:
@@ -89,3 +90,27 @@ to start the TurtleBot's navigation, use the following command:
 ```sh
 ros2 launch grp_24 tbot_launch.yaml
 ```
+
+### Installation of yolov5 to run the machine learning detection
+
+Go to your ros_space directory using using cd if it's not already the case :
+```bash
+cd
+cd ros_space
+```
+
+
+### Install the necessary dependencies to run yolov5 :
+```bash
+git clone https://github.com/ultralytics/yolov5
+pip install -r yolov5/requirements.txt
+```
+The installation of yolov5 can create a problem of compatibility with numpy. Indeed, yolov5 use a much recent version of numpy.
+
+If the issue happens, one can downgrade the version of numpy to 1.26.4 using the command :
+```bash
+pip install numpy==1.26.4 --force-reinstall
+```
+
+
+
