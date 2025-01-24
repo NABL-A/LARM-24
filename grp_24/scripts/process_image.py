@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 import signal
 import time
 import numpy as np
@@ -298,7 +299,7 @@ class Realsense(Node):
             self.get_logger().info(f"Publishing marker ID={self.marker_id}")
             self.marker_publisher.publish(marker)
             #self.marker_array.markers.append(marker)
-            self.marker_id=+1
+            self.marker_id+=1
         
         self.number_object = len(self.results.xywh[0].cpu().numpy())
         #self.marker_publisher.publish(self.marker_array)

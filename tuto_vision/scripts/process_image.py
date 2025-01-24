@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 import signal
 import time
@@ -184,7 +184,8 @@ class Realsense(Node):
 
     def publish_markers(self, results, depth_frame, color_intrin):
         self.get_logger().info("publish_markers() called")
-        if len(results.xyxy[0].cpu().numpy())==0:
+        #if len(self.results.xyxy[0].cpu().numpy())==0:
+        if len(self.results.xywh[0].cpu().numpy())==0:
             self.detected = False
 
         current_time = self.get_clock().now().to_msg()
@@ -193,22 +194,29 @@ class Realsense(Node):
             return
 
         # Convertir l'image annotée en BGR pour OpenCV
-        detection_image = np.array(results.ims[0])
+        detection_image = np.array(self.results.ims[0])
         detection_image_bgr = cv2.cvtColor(detection_image, cv2.COLOR_RGB2BGR)
 
-        for i, (x1, y1, x2, y2, conf, cls) in enumerate(results.xyxy[0].cpu().numpy()):
+        if len(self.results.xywh[0].cpu().numpy())-self.number_object > 0 :
+                self.detected = True
+                sound_msg = Sound()
+                sound_msg.value = 1
+                self.sound_publisher.publish(sound_msg)
+        self.number_object = len(results.xyxy[0].cpu().numpy())
+
+        '''for i, (x1, y1, x2, y2, conf, cls) in enumerate(self.results.xyxy[0].cpu().numpy()):
             self.get_logger().info(f"Number of detections: {len(results.xyxy[0])}")
 
             x_center = int((x1 + x2) / 2)
             y_center = int((y1 + y2) / 2)
 
             # Obtenir la distance minimale dans la boîte englobante
-            '''distance_min = 5000
+            distance_min = 5000
             for x in range(int(x1), int(x2), 30):
                 for y in range(int(y1), int(y2), 30):
                     distance = depth_frame.get_distance(x, y)
                     if distance_min > distance:
-                        distance_min = distance'''
+                        distance_min = distance
        
             depth = depth_frame.get_distance(x_center, y_center)
             dx, dy, dz = rs.rs2_deproject_pixel_to_point(color_intrin, [x_center, y_center], depth)
@@ -223,22 +231,50 @@ class Realsense(Node):
             pose_from_camera.orientation.z = 0.0
             pose_from_camera.orientation.w = 1.0
 
-            '''
             pose_from_camera.x = distance
             pose_from_camera.y = (x_center - 424) * distance / 848
             pose_from_camera.z = (y_center - 240) * distance / 480
             pose_from_camera.w = 1.0
-            '''
-      
             
-
-
             if cls == 0 and len(results.xyxy[0].cpu().numpy())-self.number_object > 0 :
                 self.detected = True
                 sound_msg = Sound()
                 sound_msg.value = 1
                 self.sound_publisher.publish(sound_msg)
-            # Get Transformation
+            '''
+      
+        for i, (x, y, w, h, conf, cls) in enumerate(self.results.xywh[0].cpu().numpy()):
+            
+            x=int(x)
+            y=int(y)
+            w=int(w)
+            h=int(h)
+
+            depth = depth_frame.get_distance(x, y)
+            dx, dy, dz = rs.rs2_deproject_pixel_to_point(color_intrin, [x, y], depth)
+            distance = math.sqrt(dx**2 + dy**2 + dz**2)
+
+            a = 424/(35*3.14159/180)
+            theta = -(int(x) - 424)/a
+            distance = math.sqrt(((dx)**2) + ((dy)**2) + ((dz)**2))
+            pose_from_camera = Pose()
+            if distance**2<0.04:
+                pose_from_camera.position.x = (float)(0)
+            else:
+                pose_from_camera.position.x = (float)((distance**2 - 0.04)**0.5)
+            pose_from_camera.position.y = (float)(distance*math.sin(theta))
+            pose_from_camera.position.z = (float)(0.0)
+
+            """
+            if cls == 0 and len(self.results.xywh[0].cpu().numpy())-self.number_object > 0 :
+                self.detected = True
+                sound_msg = Sound()
+                sound_msg.value = 1
+                self.sound_publisher.publish(sound_msg)
+            # Get Transformation"""
+
+            #self.number_object = len(results.xyxy[0].cpu().numpy())
+
             try:
                 stampedTransform = self.tf_buffer.lookup_transform(
                     'odom',
@@ -252,14 +288,9 @@ class Realsense(Node):
             # Compute goal into local coordinates
             self.map_pose = tf2_geometry_msgs.do_transform_pose( pose_from_camera, stampedTransform )
             for pt in self.Pose_markers:
-
-                sound_msg = Sound()
-                sound_msg.value = 0
-                self.sound_publisher.publish(sound_msg)
-                
                 print("\n\non est là\n\n\n")
                 if euclidean_distance((self.map_pose.position.x, self.map_pose.position.y), pt) <= self.distance:
-                    break
+                    return
 
             self.Pose_markers.append((self.map_pose.position.x, self.map_pose.position.y))
 
@@ -284,9 +315,9 @@ class Realsense(Node):
             self.get_logger().info(f"Publishing marker ID={self.marker_id}")
             self.marker_publisher.publish(marker)
             #self.marker_array.markers.append(marker)
-            self.marker_id=+1
+            self.marker_id+=1
         
-        self.number_object = len(results.xyxy[0].cpu().numpy())
+        #self.number_object = len(results.xyxy[0].cpu().numpy())
         #self.marker_publisher.publish(self.marker_array)
             
 def euclidean_distance(a, b):
