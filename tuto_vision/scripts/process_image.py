@@ -13,6 +13,7 @@ from cv_bridge import CvBridge
 import rclpy.time
 from sensor_msgs.msg import Image
 from visualization_msgs.msg import MarkerArray, Marker
+from kobuki_ros_interfaces.msg import Sound
 from geometry_msgs.msg import Pose
 from tf2_ros import *
 from tf2_geometry_msgs import *
@@ -148,6 +149,7 @@ class Realsense(Node):
         self.detection_publisher = self.create_publisher(Image, 'yolo/detection', 10)
         #self.marker_publisher = self.create_publisher(MarkerArray, 'yolo/markers', 10)
         self.marker_publisher = self.create_publisher(Marker, 'yolo/markers', 10)
+        self.sound_publisher = self.create_publisher(Sound, '/commands/sound', 10)
         self.distance_publisher = self.create_publisher(Pose, 'distance', 10)
         self.pipeline = pipeline
         self.align_to = rs.stream.color
@@ -221,6 +223,8 @@ class Realsense(Node):
             pose_from_camera.z = (y_center - 240) * distance / 480
             pose_from_camera.w = 1.0
             '''
+      
+            
 
             # Get Transformation
             try:
@@ -236,6 +240,11 @@ class Realsense(Node):
             # Compute goal into local coordinates
             self.map_pose = tf2_geometry_msgs.do_transform_pose( pose_from_camera, stampedTransform )
             for pt in self.Pose_markers:
+
+                sound_msg = Sound()
+                sound_msg.value = 0
+                self.sound_publisher.publish(sound_msg)
+                
                 print("\n\non est là\n\n\n")
                 if euclidean_distance((self.map_pose.position.x, self.map_pose.position.y), pt) <= self.distance:
                     return
