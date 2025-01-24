@@ -91,13 +91,6 @@ to start the TurtleBot's navigation, use the following command:
 ros2 launch grp_24 tbot_launch.yaml
 ```
 
-### Installation of yolov5 to run the machine learning detection
-
-Go to your ros_space directory using using cd if it's not already the case :
-```bash
-cd
-cd ros_space
-```
 
 
 ### Install the necessary dependencies to run yolov5 :
@@ -111,6 +104,14 @@ If the issue happens, one can downgrade the version of numpy to 1.26.4 using the
 ```bash
 pip install numpy==1.26.4 --force-reinstall
 ```
+
+Then, go to the script process_image (HOME/ros_space/tuto_vision/scripts/process_image.py)
+
+Then, at the line below, replace "/home/a2s4/yolov5/" by the location directory of the yolov5 that you just download:
+
+![At the line model = torch.hub.load("/home/a2s4/yolov5/", 'custom', path='/home/a2s4/ros_space/A2-S4/best20.pt', source='local')](aModifier.png)
+
+
 
 
 

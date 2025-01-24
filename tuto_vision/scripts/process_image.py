@@ -23,7 +23,7 @@ import math
 # Charger le modèle YOLOv5
 
 model = torch.hub.load(
-    "/home/a2s4/yolov5/", 'custom', path='/home/a2s4/yolov5/weightsss/best20.pt', source='local'
+    "/home/a2s4/yolov5/", 'custom', path='/home/a2s4/ros_space/A2-S4/best20.pt', source='local'
 )
 model.conf=0.5
 """
