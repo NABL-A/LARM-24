@@ -1,0 +1,6 @@
+Invoking command in '/home/a2s4/ros_space/A2-S4/build/tuto_vision': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake /home/a2s4/ros_space/A2-S4/tuto_vision -DCMAKE_INSTALL_PREFIX=/home/a2s4/ros_space/A2-S4/install/tuto_vision
+Invoked command in '/home/a2s4/ros_space/A2-S4/build/tuto_vision' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake /home/a2s4/ros_space/A2-S4/tuto_vision -DCMAKE_INSTALL_PREFIX=/home/a2s4/ros_space/A2-S4/install/tuto_vision
+Invoking command in '/home/a2s4/ros_space/A2-S4/build/tuto_vision': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --build /home/a2s4/ros_space/A2-S4/build/tuto_vision -- -j8 -l8
+Invoked command in '/home/a2s4/ros_space/A2-S4/build/tuto_vision' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --build /home/a2s4/ros_space/A2-S4/build/tuto_vision -- -j8 -l8
+Invoking command in '/home/a2s4/ros_space/A2-S4/build/tuto_vision': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --install /home/a2s4/ros_space/A2-S4/build/tuto_vision
+Invoked command in '/home/a2s4/ros_space/A2-S4/build/tuto_vision' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --install /home/a2s4/ros_space/A2-S4/build/tuto_vision

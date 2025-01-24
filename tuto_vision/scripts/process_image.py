@@ -15,6 +15,7 @@ from sensor_msgs.msg import Image
 from visualization_msgs.msg import MarkerArray, Marker
 from kobuki_ros_interfaces.msg import Sound
 from geometry_msgs.msg import Pose
+from kobuki_ros_interfaces.msg import Sound
 from tf2_ros import *
 from tf2_geometry_msgs import *
 import math
@@ -154,6 +155,8 @@ class Realsense(Node):
         self.pipeline = pipeline
         self.align_to = rs.stream.color
         self.align = rs.align(self.align_to)
+        self.detected = False
+        self.number_object = 0
 
         # Transform tool:
         self.tf_buffer = tf2_ros.Buffer()
@@ -181,6 +184,9 @@ class Realsense(Node):
 
     def publish_markers(self, results, depth_frame, color_intrin):
         self.get_logger().info("publish_markers() called")
+        if len(results.xyxy[0].cpu().numpy())==0:
+            self.detected = False
+
         current_time = self.get_clock().now().to_msg()
         currentTime =rclpy.time.Time()
         if self.results is None:
@@ -226,6 +232,12 @@ class Realsense(Node):
       
             
 
+
+            if cls == 0 and len(results.xyxy[0].cpu().numpy())-self.number_object > 0 :
+                self.detected = True
+                sound_msg = Sound()
+                sound_msg.value = 1
+                self.sound_publisher.publish(sound_msg)
             # Get Transformation
             try:
                 stampedTransform = self.tf_buffer.lookup_transform(
@@ -247,7 +259,7 @@ class Realsense(Node):
                 
                 print("\n\non est là\n\n\n")
                 if euclidean_distance((self.map_pose.position.x, self.map_pose.position.y), pt) <= self.distance:
-                    return
+                    break
 
             self.Pose_markers.append((self.map_pose.position.x, self.map_pose.position.y))
 
@@ -274,7 +286,7 @@ class Realsense(Node):
             #self.marker_array.markers.append(marker)
             self.marker_id=+1
         
-
+        self.number_object = len(results.xyxy[0].cpu().numpy())
         #self.marker_publisher.publish(self.marker_array)
             
 def euclidean_distance(a, b):

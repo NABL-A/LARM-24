@@ -1,7 +1,13 @@
 launch:
   - include:
-      file: "$(find-pkg-share tbot_sim)/launch/challenge-1.launch.py"
-
+      file: "$(find-pkg-share tbot_sim)/launch/challenge-2.launch.py"
   - node:
-      pkg: "tutorial_pkg"
-      exec: "straight_simulation.py"
+      pkg: "grp_24"
+      exec: "launch_slam.py"
+  - node:
+      pkg: "rviz2"
+      exec: "rviz2"
+      args: "-d $(find-pkg-share grp_24)/src/map_config_SLAM.rviz"
+  - node:
+      pkg: "grp_24"
+      exec: "straight.py"

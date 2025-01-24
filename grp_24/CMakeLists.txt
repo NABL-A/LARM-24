@@ -14,7 +14,7 @@ find_package(ament_cmake REQUIRED)
 
 # Install resource files.
 install(DIRECTORY
-  launch
+  launch src
   DESTINATION share/${PROJECT_NAME}/
 )
 
@@ -31,3 +31,7 @@ if(BUILD_TESTING)
 endif()
 
 ament_package()
+
+install( PROGRAMS scripts/process_image.py DESTINATION lib/${PROJECT_NAME} )
+install( PROGRAMS scripts/launch_slam.py DESTINATION lib/${PROJECT_NAME} )
+install( PROGRAMS scripts/straight.py DESTINATION lib/${PROJECT_NAME} )

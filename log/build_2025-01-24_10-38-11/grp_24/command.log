@@ -1,0 +1,4 @@
+Invoking command in '/home/a2s4/ros_space/A2-S4/build/grp_24': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --build /home/a2s4/ros_space/A2-S4/build/grp_24 -- -j8 -l8
+Invoked command in '/home/a2s4/ros_space/A2-S4/build/grp_24' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --build /home/a2s4/ros_space/A2-S4/build/grp_24 -- -j8 -l8
+Invoking command in '/home/a2s4/ros_space/A2-S4/build/grp_24': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --install /home/a2s4/ros_space/A2-S4/build/grp_24
+Invoked command in '/home/a2s4/ros_space/A2-S4/build/grp_24' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --install /home/a2s4/ros_space/A2-S4/build/grp_24

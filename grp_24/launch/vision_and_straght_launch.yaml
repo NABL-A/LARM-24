@@ -1,0 +1,7 @@
+launch:
+  - node:
+      pkg: "grp_24"
+      exec: "straight.py"
+  - node:
+      pkg: "tuto_vision"
+      exec: "process_image.py"

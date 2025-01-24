@@ -1,0 +1,17 @@
+/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/ament_index/resource_index/package_run_dependencies/tuto_vision
+/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/ament_index/resource_index/parent_prefix_path/tuto_vision
+/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/environment/ament_prefix_path.sh
+/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/environment/ament_prefix_path.dsv
+/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/environment/path.sh
+/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/environment/path.dsv
+/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/local_setup.bash
+/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/local_setup.sh
+/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/local_setup.zsh
+/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/local_setup.dsv
+/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/package.dsv
+/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/ament_index/resource_index/packages/tuto_vision
+/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/cmake/tuto_visionConfig.cmake
+/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/cmake/tuto_visionConfig-version.cmake
+/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/package.xml
+/home/a2s4/ros_space/A2-S4/install/tuto_vision/lib/tuto_vision/process_image.py
+/home/a2s4/ros_space/A2-S4/install/tuto_vision/lib/tuto_vision/detection_objet.py

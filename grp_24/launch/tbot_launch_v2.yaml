@@ -1,15 +1,14 @@
 launch:
   - node:
-      pkg: "tutorial_pkg"
-      exec: "straight.py"
-
+      pkg: "grp_24"
+      exec: "launch_slam.py"
   - node:
       pkg: "rviz2"
       exec: "rviz2"
-      name: "rviz2"
-      args: "-d $(find-pkg-share grp_24)/launch/config_visu_marker.rviz"
-
+      args: "-d $(find-pkg-share grp_24)/src/marker.rviz"
+  - node:
+      pkg: "grp_24"
+      exec: "straight.py"
   - node:
       pkg: "tuto_vision"
       exec: "process_image.py"
-      launch-prefix: "gnome-terminal --"

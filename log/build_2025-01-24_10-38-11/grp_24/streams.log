@@ -1,0 +1,31 @@
+[0.017s] Invoking command in '/home/a2s4/ros_space/A2-S4/build/grp_24': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --build /home/a2s4/ros_space/A2-S4/build/grp_24 -- -j8 -l8
+[0.053s] Invoked command in '/home/a2s4/ros_space/A2-S4/build/grp_24' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --build /home/a2s4/ros_space/A2-S4/build/grp_24 -- -j8 -l8
+[0.061s] Invoking command in '/home/a2s4/ros_space/A2-S4/build/grp_24': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --install /home/a2s4/ros_space/A2-S4/build/grp_24
+[0.069s] -- Install configuration: ""
+[0.069s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24//launch
+[0.069s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24//launch/map_v2.yaml
+[0.070s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24//launch/config_visu_marker.rviz
+[0.070s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24//launch/map_v2.pgm
+[0.070s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24//launch/operator_launch.yaml
+[0.070s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24//launch/config_image.rviz
+[0.070s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24//launch/map_config_SLAM.rviz
+[0.070s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24//launch/vision_launch.yaml
+[0.070s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24//launch/map.pgm
+[0.071s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24//launch/simulation_launch.yaml
+[0.071s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24//launch/tbot_launch_v2.yaml
+[0.071s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/ament_index/resource_index/package_run_dependencies/grp_24
+[0.071s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/ament_index/resource_index/parent_prefix_path/grp_24
+[0.071s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/environment/ament_prefix_path.sh
+[0.071s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/environment/ament_prefix_path.dsv
+[0.071s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/environment/path.sh
+[0.071s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/environment/path.dsv
+[0.072s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/local_setup.bash
+[0.072s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/local_setup.sh
+[0.072s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/local_setup.zsh
+[0.072s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/local_setup.dsv
+[0.072s] -- Installing: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/package.dsv
+[0.072s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/ament_index/resource_index/packages/grp_24
+[0.072s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/cmake/grp_24Config.cmake
+[0.072s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/cmake/grp_24Config-version.cmake
+[0.072s] -- Up-to-date: /home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/package.xml
+[0.076s] Invoked command in '/home/a2s4/ros_space/A2-S4/build/grp_24' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --install /home/a2s4/ros_space/A2-S4/build/grp_24

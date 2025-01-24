@@ -1,0 +1,9 @@
+launch:
+  - node:
+      pkg: "rviz2"
+      exec: "rviz2"
+      args: "-d $(find-pkg-share grp_24)/src/marker.rviz"
+  - node:
+      pkg: "tuto_vision"
+      exec: "process_image.py"
+      

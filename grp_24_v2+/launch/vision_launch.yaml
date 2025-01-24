@@ -1,0 +1,9 @@
+launch:
+  - node:
+      pkg: "rviz2"
+      exec: "rviz2"
+      args: "-d $(find-pkg-share grp_pibot29_2)/src/config_vision.rviz"
+  - node:
+      pkg: "grp_pibot24_v2"
+      exec: "process_image"
+      

@@ -1,0 +1,262 @@
+[0.113s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.113s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=8, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x72578fe40940>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x72578ff998d0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x72578ff998d0>>, mixin_verb=('build',))
+[0.309s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.309s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.309s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.309s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.309s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.309s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.309s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/a2s4/ros_space/A2-S4'
+[0.309s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.309s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.310s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.310s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.310s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.310s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.310s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.310s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.310s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.329s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.329s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.329s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.329s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.329s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.329s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.329s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.329s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.329s] Level 1:colcon.colcon_core.package_identification:_identify(grp_24) by extensions ['ignore', 'ignore_ament_install']
+[0.329s] Level 1:colcon.colcon_core.package_identification:_identify(grp_24) by extension 'ignore'
+[0.329s] Level 1:colcon.colcon_core.package_identification:_identify(grp_24) by extension 'ignore_ament_install'
+[0.329s] Level 1:colcon.colcon_core.package_identification:_identify(grp_24) by extensions ['colcon_pkg']
+[0.329s] Level 1:colcon.colcon_core.package_identification:_identify(grp_24) by extension 'colcon_pkg'
+[0.330s] Level 1:colcon.colcon_core.package_identification:_identify(grp_24) by extensions ['colcon_meta']
+[0.330s] Level 1:colcon.colcon_core.package_identification:_identify(grp_24) by extension 'colcon_meta'
+[0.330s] Level 1:colcon.colcon_core.package_identification:_identify(grp_24) by extensions ['ros']
+[0.330s] Level 1:colcon.colcon_core.package_identification:_identify(grp_24) by extension 'ros'
+[0.332s] DEBUG:colcon.colcon_core.package_identification:Package 'grp_24' with type 'ros.ament_cmake' and name 'grp_24'
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.333s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.333s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_vision) by extensions ['ignore', 'ignore_ament_install']
+[0.333s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_vision) by extension 'ignore'
+[0.333s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_vision) by extension 'ignore_ament_install'
+[0.333s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_vision) by extensions ['colcon_pkg']
+[0.333s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_vision) by extension 'colcon_pkg'
+[0.333s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_vision) by extensions ['colcon_meta']
+[0.333s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_vision) by extension 'colcon_meta'
+[0.333s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_vision) by extensions ['ros']
+[0.333s] Level 1:colcon.colcon_core.package_identification:_identify(tuto_vision) by extension 'ros'
+[0.333s] DEBUG:colcon.colcon_core.package_identification:Package 'tuto_vision' with type 'ros.ament_cmake' and name 'tuto_vision'
+[0.334s] Level 1:colcon.colcon_core.package_identification:_identify(tutorial_pkg) by extensions ['ignore', 'ignore_ament_install']
+[0.334s] Level 1:colcon.colcon_core.package_identification:_identify(tutorial_pkg) by extension 'ignore'
+[0.334s] Level 1:colcon.colcon_core.package_identification:_identify(tutorial_pkg) by extension 'ignore_ament_install'
+[0.334s] Level 1:colcon.colcon_core.package_identification:_identify(tutorial_pkg) by extensions ['colcon_pkg']
+[0.334s] Level 1:colcon.colcon_core.package_identification:_identify(tutorial_pkg) by extension 'colcon_pkg'
+[0.334s] Level 1:colcon.colcon_core.package_identification:_identify(tutorial_pkg) by extensions ['colcon_meta']
+[0.334s] Level 1:colcon.colcon_core.package_identification:_identify(tutorial_pkg) by extension 'colcon_meta'
+[0.334s] Level 1:colcon.colcon_core.package_identification:_identify(tutorial_pkg) by extensions ['ros']
+[0.334s] Level 1:colcon.colcon_core.package_identification:_identify(tutorial_pkg) by extension 'ros'
+[0.335s] DEBUG:colcon.colcon_core.package_identification:Package 'tutorial_pkg' with type 'ros.ament_cmake' and name 'tutorial_pkg'
+[0.335s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.335s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.335s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.335s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.335s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.356s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.356s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.357s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/a2s4/ros_space/install/grp_24_v2' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.357s] WARNING:colcon.colcon_ros.prefix_path.catkin:The path '/home/a2s4/ros_space/install/grp_24_v2' in the environment variable CMAKE_PREFIX_PATH doesn't exist
+[0.358s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 5 installed packages in /home/a2s4/ros_space/install
+[0.359s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 366 installed packages in /opt/ros/iron
+[0.361s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.411s] Level 5:colcon.colcon_core.verb:set package 'grp_24' build argument 'cmake_args' from command line to 'None'
+[0.412s] Level 5:colcon.colcon_core.verb:set package 'grp_24' build argument 'cmake_target' from command line to 'None'
+[0.412s] Level 5:colcon.colcon_core.verb:set package 'grp_24' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.412s] Level 5:colcon.colcon_core.verb:set package 'grp_24' build argument 'cmake_clean_cache' from command line to 'False'
+[0.412s] Level 5:colcon.colcon_core.verb:set package 'grp_24' build argument 'cmake_clean_first' from command line to 'False'
+[0.412s] Level 5:colcon.colcon_core.verb:set package 'grp_24' build argument 'cmake_force_configure' from command line to 'False'
+[0.412s] Level 5:colcon.colcon_core.verb:set package 'grp_24' build argument 'ament_cmake_args' from command line to 'None'
+[0.412s] Level 5:colcon.colcon_core.verb:set package 'grp_24' build argument 'catkin_cmake_args' from command line to 'None'
+[0.412s] Level 5:colcon.colcon_core.verb:set package 'grp_24' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.412s] DEBUG:colcon.colcon_core.verb:Building package 'grp_24' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/a2s4/ros_space/A2-S4/build/grp_24', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/a2s4/ros_space/A2-S4/install/grp_24', 'merge_install': False, 'path': '/home/a2s4/ros_space/A2-S4/grp_24', 'symlink_install': False, 'test_result_base': None}
+[0.412s] Level 5:colcon.colcon_core.verb:set package 'tuto_vision' build argument 'cmake_args' from command line to 'None'
+[0.412s] Level 5:colcon.colcon_core.verb:set package 'tuto_vision' build argument 'cmake_target' from command line to 'None'
+[0.412s] Level 5:colcon.colcon_core.verb:set package 'tuto_vision' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.412s] Level 5:colcon.colcon_core.verb:set package 'tuto_vision' build argument 'cmake_clean_cache' from command line to 'False'
+[0.412s] Level 5:colcon.colcon_core.verb:set package 'tuto_vision' build argument 'cmake_clean_first' from command line to 'False'
+[0.412s] Level 5:colcon.colcon_core.verb:set package 'tuto_vision' build argument 'cmake_force_configure' from command line to 'False'
+[0.412s] Level 5:colcon.colcon_core.verb:set package 'tuto_vision' build argument 'ament_cmake_args' from command line to 'None'
+[0.412s] Level 5:colcon.colcon_core.verb:set package 'tuto_vision' build argument 'catkin_cmake_args' from command line to 'None'
+[0.412s] Level 5:colcon.colcon_core.verb:set package 'tuto_vision' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.412s] DEBUG:colcon.colcon_core.verb:Building package 'tuto_vision' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/a2s4/ros_space/A2-S4/build/tuto_vision', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/a2s4/ros_space/A2-S4/install/tuto_vision', 'merge_install': False, 'path': '/home/a2s4/ros_space/A2-S4/tuto_vision', 'symlink_install': False, 'test_result_base': None}
+[0.413s] Level 5:colcon.colcon_core.verb:set package 'tutorial_pkg' build argument 'cmake_args' from command line to 'None'
+[0.413s] Level 5:colcon.colcon_core.verb:set package 'tutorial_pkg' build argument 'cmake_target' from command line to 'None'
+[0.413s] Level 5:colcon.colcon_core.verb:set package 'tutorial_pkg' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.413s] Level 5:colcon.colcon_core.verb:set package 'tutorial_pkg' build argument 'cmake_clean_cache' from command line to 'False'
+[0.413s] Level 5:colcon.colcon_core.verb:set package 'tutorial_pkg' build argument 'cmake_clean_first' from command line to 'False'
+[0.413s] Level 5:colcon.colcon_core.verb:set package 'tutorial_pkg' build argument 'cmake_force_configure' from command line to 'False'
+[0.413s] Level 5:colcon.colcon_core.verb:set package 'tutorial_pkg' build argument 'ament_cmake_args' from command line to 'None'
+[0.413s] Level 5:colcon.colcon_core.verb:set package 'tutorial_pkg' build argument 'catkin_cmake_args' from command line to 'None'
+[0.413s] Level 5:colcon.colcon_core.verb:set package 'tutorial_pkg' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.413s] DEBUG:colcon.colcon_core.verb:Building package 'tutorial_pkg' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/a2s4/ros_space/A2-S4/build/tutorial_pkg', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg', 'merge_install': False, 'path': '/home/a2s4/ros_space/A2-S4/tutorial_pkg', 'symlink_install': False, 'test_result_base': None}
+[0.413s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.414s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.414s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/a2s4/ros_space/A2-S4/grp_24' with build type 'ament_cmake'
+[0.414s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/a2s4/ros_space/A2-S4/grp_24'
+[0.416s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.416s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.416s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.420s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/a2s4/ros_space/A2-S4/tuto_vision' with build type 'ament_cmake'
+[0.420s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/a2s4/ros_space/A2-S4/tuto_vision'
+[0.420s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.420s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.423s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/a2s4/ros_space/A2-S4/tutorial_pkg' with build type 'ament_cmake'
+[0.423s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/a2s4/ros_space/A2-S4/tutorial_pkg'
+[0.424s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.424s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.432s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/a2s4/ros_space/A2-S4/build/grp_24': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake /home/a2s4/ros_space/A2-S4/grp_24 -DCMAKE_INSTALL_PREFIX=/home/a2s4/ros_space/A2-S4/install/grp_24
+[0.435s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/a2s4/ros_space/A2-S4/build/tuto_vision': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake /home/a2s4/ros_space/A2-S4/tuto_vision -DCMAKE_INSTALL_PREFIX=/home/a2s4/ros_space/A2-S4/install/tuto_vision
+[0.438s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/a2s4/ros_space/A2-S4/build/tutorial_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake /home/a2s4/ros_space/A2-S4/tutorial_pkg -DCMAKE_INSTALL_PREFIX=/home/a2s4/ros_space/A2-S4/install/tutorial_pkg
+[1.054s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/a2s4/ros_space/A2-S4/build/grp_24' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake /home/a2s4/ros_space/A2-S4/grp_24 -DCMAKE_INSTALL_PREFIX=/home/a2s4/ros_space/A2-S4/install/grp_24
+[1.055s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/a2s4/ros_space/A2-S4/build/grp_24': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --build /home/a2s4/ros_space/A2-S4/build/grp_24 -- -j8 -l8
+[1.072s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/a2s4/ros_space/A2-S4/build/tuto_vision' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake /home/a2s4/ros_space/A2-S4/tuto_vision -DCMAKE_INSTALL_PREFIX=/home/a2s4/ros_space/A2-S4/install/tuto_vision
+[1.073s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/a2s4/ros_space/A2-S4/build/tuto_vision': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --build /home/a2s4/ros_space/A2-S4/build/tuto_vision -- -j8 -l8
+[1.089s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/a2s4/ros_space/A2-S4/build/grp_24' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --build /home/a2s4/ros_space/A2-S4/build/grp_24 -- -j8 -l8
+[1.098s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/a2s4/ros_space/A2-S4/build/grp_24': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --install /home/a2s4/ros_space/A2-S4/build/grp_24
+[1.104s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/a2s4/ros_space/A2-S4/build/tuto_vision' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --build /home/a2s4/ros_space/A2-S4/build/tuto_vision -- -j8 -l8
+[1.106s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/a2s4/ros_space/A2-S4/build/tuto_vision': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --install /home/a2s4/ros_space/A2-S4/build/tuto_vision
+[1.108s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(grp_24)
+[1.108s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/a2s4/ros_space/A2-S4/build/grp_24' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --install /home/a2s4/ros_space/A2-S4/build/grp_24
+[1.110s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/grp_24' for CMake module files
+[1.110s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/grp_24' for CMake config files
+[1.110s] Level 1:colcon.colcon_core.shell:create_environment_hook('grp_24', 'cmake_prefix_path')
+[1.110s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/hook/cmake_prefix_path.ps1'
+[1.111s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/hook/cmake_prefix_path.dsv'
+[1.112s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/hook/cmake_prefix_path.sh'
+[1.114s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/grp_24/bin'
+[1.114s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/grp_24/lib/pkgconfig/grp_24.pc'
+[1.114s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/grp_24/lib/python3.10/site-packages'
+[1.114s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/grp_24/bin'
+[1.115s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/package.ps1'
+[1.115s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/package.dsv'
+[1.116s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/package.sh'
+[1.116s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/package.bash'
+[1.117s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/package.zsh'
+[1.117s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/a2s4/ros_space/A2-S4/install/grp_24/share/colcon-core/packages/grp_24)
+[1.118s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(grp_24)
+[1.118s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/grp_24' for CMake module files
+[1.118s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/grp_24' for CMake config files
+[1.118s] Level 1:colcon.colcon_core.shell:create_environment_hook('grp_24', 'cmake_prefix_path')
+[1.119s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/hook/cmake_prefix_path.ps1'
+[1.119s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/hook/cmake_prefix_path.dsv'
+[1.119s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/hook/cmake_prefix_path.sh'
+[1.120s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/grp_24/bin'
+[1.120s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/grp_24/lib/pkgconfig/grp_24.pc'
+[1.120s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/grp_24/lib/python3.10/site-packages'
+[1.120s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/grp_24/bin'
+[1.120s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/package.ps1'
+[1.121s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/package.dsv'
+[1.121s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/package.sh'
+[1.121s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/package.bash'
+[1.122s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/grp_24/share/grp_24/package.zsh'
+[1.122s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/a2s4/ros_space/A2-S4/install/grp_24/share/colcon-core/packages/grp_24)
+[1.123s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(tuto_vision)
+[1.123s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tuto_vision' for CMake module files
+[1.124s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/a2s4/ros_space/A2-S4/build/tuto_vision' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --install /home/a2s4/ros_space/A2-S4/build/tuto_vision
+[1.124s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tuto_vision' for CMake config files
+[1.124s] Level 1:colcon.colcon_core.shell:create_environment_hook('tuto_vision', 'cmake_prefix_path')
+[1.124s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/hook/cmake_prefix_path.ps1'
+[1.124s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/hook/cmake_prefix_path.dsv'
+[1.125s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/hook/cmake_prefix_path.sh'
+[1.125s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tuto_vision/lib'
+[1.125s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tuto_vision/bin'
+[1.125s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tuto_vision/lib/pkgconfig/tuto_vision.pc'
+[1.125s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tuto_vision/lib/python3.10/site-packages'
+[1.126s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tuto_vision/bin'
+[1.126s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/package.ps1'
+[1.126s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/package.dsv'
+[1.127s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/package.sh'
+[1.127s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/package.bash'
+[1.127s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/package.zsh'
+[1.128s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/colcon-core/packages/tuto_vision)
+[1.128s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(tuto_vision)
+[1.128s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tuto_vision' for CMake module files
+[1.129s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tuto_vision' for CMake config files
+[1.129s] Level 1:colcon.colcon_core.shell:create_environment_hook('tuto_vision', 'cmake_prefix_path')
+[1.129s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/hook/cmake_prefix_path.ps1'
+[1.129s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/hook/cmake_prefix_path.dsv'
+[1.129s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/hook/cmake_prefix_path.sh'
+[1.130s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tuto_vision/lib'
+[1.130s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tuto_vision/bin'
+[1.130s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tuto_vision/lib/pkgconfig/tuto_vision.pc'
+[1.130s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tuto_vision/lib/python3.10/site-packages'
+[1.130s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tuto_vision/bin'
+[1.131s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/package.ps1'
+[1.131s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/package.dsv'
+[1.131s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/package.sh'
+[1.132s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/package.bash'
+[1.132s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/tuto_vision/package.zsh'
+[1.132s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/a2s4/ros_space/A2-S4/install/tuto_vision/share/colcon-core/packages/tuto_vision)
+[1.562s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/a2s4/ros_space/A2-S4/build/tutorial_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake /home/a2s4/ros_space/A2-S4/tutorial_pkg -DCMAKE_INSTALL_PREFIX=/home/a2s4/ros_space/A2-S4/install/tutorial_pkg
+[1.564s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/a2s4/ros_space/A2-S4/build/tutorial_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --build /home/a2s4/ros_space/A2-S4/build/tutorial_pkg -- -j8 -l8
+[1.602s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/a2s4/ros_space/A2-S4/build/tutorial_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --build /home/a2s4/ros_space/A2-S4/build/tutorial_pkg -- -j8 -l8
+[1.604s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/a2s4/ros_space/A2-S4/build/tutorial_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --install /home/a2s4/ros_space/A2-S4/build/tutorial_pkg
+[1.614s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(tutorial_pkg)
+[1.615s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg' for CMake module files
+[1.615s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/a2s4/ros_space/A2-S4/build/tutorial_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/iron /usr/bin/cmake --install /home/a2s4/ros_space/A2-S4/build/tutorial_pkg
+[1.616s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg' for CMake config files
+[1.616s] Level 1:colcon.colcon_core.shell:create_environment_hook('tutorial_pkg', 'cmake_prefix_path')
+[1.616s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/share/tutorial_pkg/hook/cmake_prefix_path.ps1'
+[1.617s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/share/tutorial_pkg/hook/cmake_prefix_path.dsv'
+[1.617s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/share/tutorial_pkg/hook/cmake_prefix_path.sh'
+[1.618s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/lib'
+[1.618s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/bin'
+[1.618s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/lib/pkgconfig/tutorial_pkg.pc'
+[1.618s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/lib/python3.10/site-packages'
+[1.619s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/bin'
+[1.619s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/share/tutorial_pkg/package.ps1'
+[1.620s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/share/tutorial_pkg/package.dsv'
+[1.620s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/share/tutorial_pkg/package.sh'
+[1.620s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/share/tutorial_pkg/package.bash'
+[1.621s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/share/tutorial_pkg/package.zsh'
+[1.621s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/share/colcon-core/packages/tutorial_pkg)
+[1.622s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(tutorial_pkg)
+[1.622s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg' for CMake module files
+[1.622s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg' for CMake config files
+[1.622s] Level 1:colcon.colcon_core.shell:create_environment_hook('tutorial_pkg', 'cmake_prefix_path')
+[1.623s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/share/tutorial_pkg/hook/cmake_prefix_path.ps1'
+[1.623s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/share/tutorial_pkg/hook/cmake_prefix_path.dsv'
+[1.623s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/share/tutorial_pkg/hook/cmake_prefix_path.sh'
+[1.624s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/lib'
+[1.624s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/bin'
+[1.624s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/lib/pkgconfig/tutorial_pkg.pc'
+[1.624s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/lib/python3.10/site-packages'
+[1.625s] Level 1:colcon.colcon_core.environment:checking '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/bin'
+[1.625s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/share/tutorial_pkg/package.ps1'
+[1.625s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/share/tutorial_pkg/package.dsv'
+[1.626s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/share/tutorial_pkg/package.sh'
+[1.626s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/share/tutorial_pkg/package.bash'
+[1.627s] INFO:colcon.colcon_core.shell:Creating package script '/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/share/tutorial_pkg/package.zsh'
+[1.627s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/a2s4/ros_space/A2-S4/install/tutorial_pkg/share/colcon-core/packages/tutorial_pkg)
+[1.627s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[1.628s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[1.628s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[1.628s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[1.633s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.notify_send': Could not find 'notify-send'
+[1.633s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[1.633s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[1.633s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[1.644s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[1.644s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/a2s4/ros_space/A2-S4/install/local_setup.ps1'
+[1.646s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/a2s4/ros_space/A2-S4/install/_local_setup_util_ps1.py'
+[1.647s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/a2s4/ros_space/A2-S4/install/setup.ps1'
+[1.648s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/a2s4/ros_space/A2-S4/install/local_setup.sh'
+[1.649s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/a2s4/ros_space/A2-S4/install/_local_setup_util_sh.py'
+[1.650s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/a2s4/ros_space/A2-S4/install/setup.sh'
+[1.652s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/a2s4/ros_space/A2-S4/install/local_setup.bash'
+[1.652s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/a2s4/ros_space/A2-S4/install/setup.bash'
+[1.654s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/a2s4/ros_space/A2-S4/install/local_setup.zsh'
+[1.655s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/a2s4/ros_space/A2-S4/install/setup.zsh'

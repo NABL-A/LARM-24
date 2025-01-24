@@ -1,0 +1,9 @@
+/home/a2s4/ros_space/A2-S4/build/tuto_vision/CMakeFiles/uninstall.dir
+/home/a2s4/ros_space/A2-S4/build/tuto_vision/CMakeFiles/tuto_vision_uninstall.dir
+/home/a2s4/ros_space/A2-S4/build/tuto_vision/CMakeFiles/test.dir
+/home/a2s4/ros_space/A2-S4/build/tuto_vision/CMakeFiles/edit_cache.dir
+/home/a2s4/ros_space/A2-S4/build/tuto_vision/CMakeFiles/rebuild_cache.dir
+/home/a2s4/ros_space/A2-S4/build/tuto_vision/CMakeFiles/list_install_components.dir
+/home/a2s4/ros_space/A2-S4/build/tuto_vision/CMakeFiles/install.dir
+/home/a2s4/ros_space/A2-S4/build/tuto_vision/CMakeFiles/install/local.dir
+/home/a2s4/ros_space/A2-S4/build/tuto_vision/CMakeFiles/install/strip.dir

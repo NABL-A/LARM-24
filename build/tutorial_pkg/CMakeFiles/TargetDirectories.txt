@@ -1,0 +1,9 @@
+/home/a2s4/ros_space/A2-S4/build/tutorial_pkg/CMakeFiles/uninstall.dir
+/home/a2s4/ros_space/A2-S4/build/tutorial_pkg/CMakeFiles/tutorial_pkg_uninstall.dir
+/home/a2s4/ros_space/A2-S4/build/tutorial_pkg/CMakeFiles/test.dir
+/home/a2s4/ros_space/A2-S4/build/tutorial_pkg/CMakeFiles/edit_cache.dir
+/home/a2s4/ros_space/A2-S4/build/tutorial_pkg/CMakeFiles/rebuild_cache.dir
+/home/a2s4/ros_space/A2-S4/build/tutorial_pkg/CMakeFiles/list_install_components.dir
+/home/a2s4/ros_space/A2-S4/build/tutorial_pkg/CMakeFiles/install.dir
+/home/a2s4/ros_space/A2-S4/build/tutorial_pkg/CMakeFiles/install/local.dir
+/home/a2s4/ros_space/A2-S4/build/tutorial_pkg/CMakeFiles/install/strip.dir
