@@ -2,7 +2,7 @@
 
 The goal of this project is to develop a Python program that allows a TurtleBot robot to autonomously navigate in a closed area and detect the presence of green ghosts.
 The robot is capable of avoiding obstacles it detects through a laser scan. It recognizes objects using a camera mounted on the robot's head.
-Project made by Alban Casella, Alexis Manuel and Suzanne-Léonore Girard-Jollet. Here's the video explaining our work : https://youtu.be/aVJrLFVlfDE
+Project made by Alban Casella, Alexis Manuel and Suzanne-Léonore Girard-Jollet. Here's the video explaining our work : https://youtu.be/97TwO1b_6R8
 
 ## Prerequisites
 
